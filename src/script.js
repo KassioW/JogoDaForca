@@ -76,7 +76,7 @@ function checarJogo() {
   }
 
   if (palavraSecreta === container.innerText) {
-    mensagem = "PARABUANSSS!!! TU GANHOU!!";
+    mensagem = "PARABUAINSSS!!! TU GANHOU!!";
   }
 
   if (mensagem) {
