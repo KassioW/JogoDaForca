@@ -1,0 +1,82 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.escondido {
+  display: none;
+}
+
+#containerJogo {
+  margin-top: 20px;
+}
+
+#forca {
+  width: 23vh; 
+  height: 25vh; 
+  margin: auto;
+  background-size: 100%;
+}
+
+#exibicaoPalavra {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#teclado {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #ddd;
+}
+
+.forca {
+  background-image: url('img/forca.png');
+  height: auto;
+  width: auto;
+}
+
+.forca {
+  background-image: url('img/forca01.png');
+  height: auto;
+  width: auto;
+}
+
+.forca {
+  background-image: url('img/forca02.png');
+  height: auto;
+  width: auto;
+}
+
+.forca {
+  background-image: url('img/forca03.png');
+  height: auto;
+  width: auto;
+}
+
+.forca {
+  background-image: url('img/forca04.png');
+  height: auto;
+  width: auto;
+}
+
+.forca {
+  background-image: url('img/forca05.png');
+  height: auto;
+  width: auto;
+}
+
+.forca {
+  background-image: url('img/forca06.png');
+  height: auto;
+  width: auto;
+}
+
+/* ... forca-1 até forca-6, cada uma com uma imagem diferente da forca ... */
