@@ -2,13 +2,15 @@ const jogador1Input = document.getElementById('jogador1');
 const jogador2Input = document.getElementById('jogador2');
 const iniciarJogoBotao = document.getElementById('iniciarJogo');
 const jogadorAtualDisplay = document.getElementById('jogadorAtual');
-const inimigo = document.getElementById('jogadorInimigo');
 const forcaDisplay = document.getElementById('forca');
 const exibicaoPalavra = document.getElementById('exibicaoPalavra');
 const teclado = document.getElementById('teclado');
 const containerResultado = document.getElementById('containerResultado');
 const textoResultado = document.getElementById('textoResultado');
 const reiniciarBotao = document.getElementById('reiniciarJogo');
+const letrasUtilizadasContainer = document.getElementById('letrasUtilizadasContainer');
+const letrasUtilizadasDisplay = document.getElementById('letrasUtilizadas');
+
 
 const imagensForca = ['img/forca.png', 'img/forca01.png', 'img/forca02.png', 'img/forca03.png', 'img/forca04.png', 'img/forca05.png', 'img/forca06.png'];
 
@@ -19,7 +21,7 @@ let letrasChutadas;
 let chutesIncorretos;
 let jogadorInimigo; 
 
-iniciarJogoBotao.addEventListener('click', iniciarJogo);
+iniciarJogoBotao.addEventListener('click', verificarNomesJogadores);
 reiniciarBotao.addEventListener('click', reiniciarJogo);
 
 // cria o popup que sobe caso não seja preenchido o nome dos jogadores
@@ -33,10 +35,25 @@ function showPopup(message) {
     popup.classList.add('fade-out'); // Adiciona a classe de fade-out
     setTimeout(() => {
       popup.remove();
-    }, 300); // Remove o popup após a animação
-  }, 3000);
+    }, 200); // Remove o popup após a animação
+  }, 1000);
 }
 
+function verificarNomesJogadores() {
+  const nomeJogador1 = jogador1Input.value.trim();
+  const nomeJogador2 = jogador2Input.value.trim();
+
+  if (!contemApenasLetras(nomeJogador1) || !contemApenasLetras(nomeJogador2)) {
+    showPopup('Por favor, digite apenas letras nos nomes dos jogadores.');
+    return;
+  }
+
+  iniciarJogo();
+}
+
+function contemApenasLetras(texto) {
+  return /^[A-Za-z]+$/.test(texto);
+}
 
 function iniciarJogo() {
 
@@ -66,14 +83,27 @@ function iniciarJogo() {
     // Atualiza o display com o nome do jogador atual
 
     jogadorAtualDisplay.textContent = jogadorAtual;
+    atualizarLetrasUtilizadas();
     iniciarJogoBotao.style.display = 'none';
     jogador1Input.disabled = true;
     jogador2Input.disabled = true;
 
-
+  
   // solicita a palavra secreta e cria o array de span para as letras
   palavraSecreta = prompt(`${jogadorInimigo}, insira a palavra secreta para ${jogadorAtual}:`).toUpperCase();
   exibicaoPalavra.innerHTML = palavraSecreta.split('').map(letra => `<span>${letrasChutadas.includes(letra) ? letra : '_'}</span>`).join('');
+  
+  palavraSecreta = palavraSecreta.trim();
+  if (palavraSecreta === '') {
+    showPopup('Por favor, escreva algo na palavra secreta, aperte F5 para iniciar novamente.');
+    return;
+  }
+  if (!contemApenasLetras(palavraSecreta)) {
+    showPopup('Por favor, digite apenas letras na palavra secreta, aperte F5 para iniciar novamente.');
+    return;
+  }
+
+
 
   atualizarForca();
 
@@ -92,9 +122,25 @@ function iniciarJogo() {
   containerResultado.classList.add('escondido');
 }
 
+
+function atualizarLetrasUtilizadas() {
+  letrasUtilizadasDisplay.textContent = letrasChutadas.join(', ');
+
+  // Verifica se alguma letra foi usada mais de uma vez
+  const letrasRepetidas = letrasChutadas.filter((letra, index) => letrasChutadas.indexOf(letra) !== index);
+
+  if (letrasRepetidas.length > 0) {
+    showPopup(`As letras ${letrasRepetidas.join(', ')} foram usadas mais de uma vez!`);
+  }
+}
 function fazerChute(letra) {
 
-    // Verifica se a letra ainda não foi chutada anteriormente 
+   // Verifica se a letra já foi chutada anteriormente
+   if (letrasChutadas.includes(letra)) {
+    showPopup(`Você já utilizou a letra "${letra}", tente outra.`);
+    return;
+  }
+  // Atualiza a exibição das letras utilizadas
 
   if (!letrasChutadas.includes(letra)) {
     letrasChutadas.push(letra);
@@ -105,14 +151,26 @@ function fazerChute(letra) {
       atualizarForca();
     }
 
-        // Converte a palavra secreta em um array de letras e adiciona ao array se for correta
+         // Atualiza a exibição das letras utilizadas
+
+    const letrasUtilizadasContainer = document.getElementById('letrasUtilizadasContainer');
+
+    letrasUtilizadasContainer.textContent = 'Letras utilizadas: ' + letrasChutadas.join(', ');
+
+     // Converte a palavra secreta em um array de letras e adiciona ao array se for correta
 
     const palavraArray = palavraSecreta.split('');
+
     const spansExibicaoPalavra = exibicaoPalavra.querySelectorAll('span');
+
     for (let i = 0; i < palavraArray.length; i++) {
+
       if (palavraArray[i] === letra) {
+
         spansExibicaoPalavra[i].textContent = letra;
+        
       }
+ 
     }
 
 

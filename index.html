@@ -10,9 +10,9 @@
   <h1></h1>
   <div id="nomesJogadores">
     <label for="jogador1">Jogador 1:</label>
-    <input type="text" id="jogador1" placeholder="Nome do Jogador 1">
+    <input type="text" id="jogador1" placeholder="Nome do Jogador 1" pattern="[A-Za-z]+" title="Digite apenas letras" required>
     <label for="jogador2">Jogador 2:</label>
-    <input type="text" id="jogador2" placeholder="Nome do Jogador 2">
+    <input type="text" id="jogador2" placeholder="Nome do Jogador 2" pattern="[A-Za-z]+" title="Digite apenas letras" required>
     <button id="iniciarJogo">Iniciar Jogo</button>
   </div>
   <div id="containerJogo" class="escondido">
@@ -20,12 +20,16 @@
     <div id="forca" class="forca-0"></div>
     <div id="exibicaoPalavra"></div>
     <div id="teclado"></div>
+    <div id="letrasUtilizadasContainer">Letras utilizadas:</div>
+    </div>
   </div>
   <div id="containerResultado" class="escondido">
     <h2>Resultado:</h2>
     <p id="textoResultado"></p>
     <button id="reiniciarJogo">Jogar Novamente</button>
   </div>
+  <div id="letrasUtilizadas"></div>
+
   <script src="script.js"></script>
 </body>
 </html>
