@@ -42,7 +42,10 @@ function showPopup(message) {
 function verificarNomesJogadores() {
   const nomeJogador1 = jogador1Input.value.trim();
   const nomeJogador2 = jogador2Input.value.trim();
-
+  
+  function contemApenasLetras(texto) {
+    return /^[A-Za-z]+$/.test(texto);
+  }
   if (!contemApenasLetras(nomeJogador1) || !contemApenasLetras(nomeJogador2)) {
     showPopup('Por favor, digite apenas letras nos nomes dos jogadores.');
     return;
@@ -51,9 +54,7 @@ function verificarNomesJogadores() {
   iniciarJogo();
 }
 
-function contemApenasLetras(texto) {
-  return /^[A-Za-z]+$/.test(texto);
-}
+
 
 function iniciarJogo() {
 
@@ -70,7 +71,7 @@ function iniciarJogo() {
   }
 
     
-  // Cria um array com os nomes dos jogadores e inicia o array de chutes de letras
+  // Define os jogadores e os randomiza para iniciar o jogo || cria o array para contabilizar as letras que foram chutadas
 
   const nomesJogadores = [jogador1Input.value, jogador2Input.value];
   indiceJogadorAtual = Math.floor(Math.random() * 2);
@@ -80,7 +81,7 @@ function iniciarJogo() {
   jogadorInimigo = nomesJogadores[(indiceJogadorAtual + 1) % nomesJogadores.length]; // Define o jogador inimigo
   
 
-    // Atualiza o display com o nome do jogador atual
+    // Atualiza o display com o nome do jogador atual e atualza as letras utilizadas
 
     jogadorAtualDisplay.textContent = jogadorAtual;
     atualizarLetrasUtilizadas();
@@ -92,7 +93,7 @@ function iniciarJogo() {
   // solicita a palavra secreta e cria o array de span para as letras
   palavraSecreta = prompt(`${jogadorInimigo}, insira a palavra secreta para ${jogadorAtual}:`).toUpperCase();
   exibicaoPalavra.innerHTML = palavraSecreta.split('').map(letra => `<span>${letrasChutadas.includes(letra) ? letra : '_'}</span>`).join('');
-  
+
   palavraSecreta = palavraSecreta.trim();
   if (palavraSecreta === '') {
     showPopup('Por favor, escreva algo na palavra secreta, aperte F5 para iniciar novamente.');
