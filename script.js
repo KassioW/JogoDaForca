@@ -2,6 +2,7 @@ const jogador1Input = document.getElementById('jogador1');
 const jogador2Input = document.getElementById('jogador2');
 const iniciarJogoBotao = document.getElementById('iniciarJogo');
 const jogadorAtualDisplay = document.getElementById('jogadorAtual');
+const inimigo = document.getElementById('jogadorInimigo');
 const forcaDisplay = document.getElementById('forca');
 const exibicaoPalavra = document.getElementById('exibicaoPalavra');
 const teclado = document.getElementById('teclado');
@@ -16,6 +17,7 @@ let jogadorAtual;
 let palavraSecreta;
 let letrasChutadas;
 let chutesIncorretos;
+
 
 iniciarJogoBotao.addEventListener('click', iniciarJogo);
 reiniciarBotao.addEventListener('click', reiniciarJogo);
@@ -50,13 +52,15 @@ function iniciarJogo() {
     return;
   }
 
-    // Cria um array com os nomes dos jogadores e inicia o array de chutes de letras
+    
+  // Cria um array com os nomes dos jogadores e inicia o array de chutes de letras
 
   const nomesJogadores = [jogador1Input.value, jogador2Input.value];
   indiceJogadorAtual = Math.floor(Math.random() * 2);
   jogadorAtual = nomesJogadores[indiceJogadorAtual];
   letrasChutadas = [];
   chutesIncorretos = 0;
+  
 
     // Atualiza o display com o nome do jogador atual
   jogadorAtualDisplay.textContent = jogadorAtual;

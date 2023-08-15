@@ -20,11 +20,11 @@ body {
 }
 
 h1 {
-  width: 510px;
-  height: 510px;
+  width: 53vh;
+  height: 53vh;
   background-position: absolute;
-  margin-bottom: 535px;
-  font-size: 10vh;
+  background-repeat: no-repeat;
+  margin-bottom: 49vh;
   background-image: url('img/jogo.png');
 }
 
