@@ -17,7 +17,7 @@ let jogadorAtual;
 let palavraSecreta;
 let letrasChutadas;
 let chutesIncorretos;
-
+let jogadorInimigo; 
 
 iniciarJogoBotao.addEventListener('click', iniciarJogo);
 reiniciarBotao.addEventListener('click', reiniciarJogo);
@@ -60,17 +60,19 @@ function iniciarJogo() {
   jogadorAtual = nomesJogadores[indiceJogadorAtual];
   letrasChutadas = [];
   chutesIncorretos = 0;
+  jogadorInimigo = nomesJogadores[(indiceJogadorAtual + 1) % nomesJogadores.length]; // Define o jogador inimigo
   
 
     // Atualiza o display com o nome do jogador atual
-  jogadorAtualDisplay.textContent = jogadorAtual;
-  iniciarJogoBotao.style.display = 'none';
-  jogador1Input.disabled = true;
-  jogador2Input.disabled = true;
+
+    jogadorAtualDisplay.textContent = jogadorAtual;
+    iniciarJogoBotao.style.display = 'none';
+    jogador1Input.disabled = true;
+    jogador2Input.disabled = true;
 
 
   // solicita a palavra secreta e cria o array de span para as letras
-  palavraSecreta = prompt(`${jogadorAtual}, digite uma palavra secreta:`).toUpperCase();
+  palavraSecreta = prompt(`${jogadorInimigo}, insira a palavra secreta para ${jogadorAtual}:`).toUpperCase();
   exibicaoPalavra.innerHTML = palavraSecreta.split('').map(letra => `<span>${letrasChutadas.includes(letra) ? letra : '_'}</span>`).join('');
 
   atualizarForca();
