@@ -39,13 +39,16 @@ function showPopup(message) {
   }, 1000);
 }
 
+function contemApenasLetras(texto) {
+  return /^[A-Za-z]+$/.test(texto);
+}
+
+
 function verificarNomesJogadores() {
   const nomeJogador1 = jogador1Input.value.trim();
   const nomeJogador2 = jogador2Input.value.trim();
   
-  function contemApenasLetras(texto) {
-    return /^[A-Za-z]+$/.test(texto);
-  }
+  
   if (!contemApenasLetras(nomeJogador1) || !contemApenasLetras(nomeJogador2)) {
     showPopup('Por favor, digite apenas letras nos nomes dos jogadores.');
     return;
