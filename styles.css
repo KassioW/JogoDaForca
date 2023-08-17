@@ -11,22 +11,32 @@ body {
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente */
+  justify-content: center; /* Centraliza verticalmente */
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
   max-width: 400px;
   width: 90%;
+  margin: auto;
 }
 
+
 h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 480px;
+  background-position: center; /* Centraliza a imagem vertical e horizontalmente */
+  background-repeat: no-repeat;
+  background-image: url('img/jogo.png');
   width: 100%;
   height: 100%;
-  background-position: absolute;
-  background-repeat: no-repeat;
-  margin-left: 70vh;
-  background-image: url('img/jogo.png');
 }
+
 
 #nomesJogadores{
   text-align: center;
